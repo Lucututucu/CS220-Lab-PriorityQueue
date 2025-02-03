@@ -27,7 +27,24 @@ typedef LinkedList PriorityQueueAsLinkedList;
  * @post  - queue one element longer
  */
 void priorityQueueEnqueue(PriorityQueueAsLinkedList* queue, double element, int priority) {
+    Node* temp = queue->head;
+    int i = 0;
+    while(temp != NULL) {
+        if (priority >= temp->priority) {
+            printf("I'm %lf %d, passing %lf \n ", element, priority, temp->data);
+            temp = temp->next;
+            if (temp == NULL) {
+                printf("I HATE YOU\n");
+            }
+            i++;   
+        } else {
+            printf("I'm at the end %lf %d\n ", element, priority);
+            temp = NULL;
+        }
+    }
     
+    printf("I HATE YOU\n");
+    insertElementLinkedList(queue, i, element, priority);
 }
 
 /** priorityQueueDequeue()
@@ -37,7 +54,9 @@ void priorityQueueEnqueue(PriorityQueueAsLinkedList* queue, double element, int 
  * @post  - queue one element shorter
  */
 double priorityQueueDequeue(PriorityQueueAsLinkedList* queue) {
-    return 0.0;
+    double dequeueNum = getElementLinkedList(queue, 0)->data;
+    deleteElementLinkedList(queue, 0);
+    return dequeueNum;
 }
 
 /** priorityQueueIsEmpty()
@@ -48,7 +67,7 @@ double priorityQueueDequeue(PriorityQueueAsLinkedList* queue) {
  * @post   - queue unmodified; and empty status returned
  */
 bool priorityQueueIsEmpty(PriorityQueueAsLinkedList* queue) {
-    return true;
+    return lengthOfLinkedList(queue) == 0;
 }
 
 /** priorityQueueIsFull()
@@ -59,7 +78,7 @@ bool priorityQueueIsEmpty(PriorityQueueAsLinkedList* queue) {
  * @post   - queue unmodified; always returns false
  */
 bool priorityQueueIsFull(PriorityQueueAsLinkedList* queue) {
-    return true;
+    return false;
 }
 
 /** priorityQueueInit()
@@ -69,7 +88,7 @@ bool priorityQueueIsFull(PriorityQueueAsLinkedList* queue) {
  * @post   - new empty queue returned
  */
 PriorityQueueAsLinkedList* priorityQueueInit() {
-    return NULL;
+    return createLinkedList();
 }
 
 /** deletePriorityQueue()
@@ -79,7 +98,7 @@ PriorityQueueAsLinkedList* priorityQueueInit() {
  * @post   - the queue is erased
  */
 void deletePriorityQueue(PriorityQueueAsLinkedList* queue) {
-    
+    deleteLinkedList(queue);
 }
 
 /** priorityQueuePeek()
@@ -91,7 +110,7 @@ void deletePriorityQueue(PriorityQueueAsLinkedList* queue) {
  * @post   - queue unmodified; top element returned
  */
 double priorityQueuePeek(PriorityQueueAsLinkedList* queue) {
-    return 0.0;
+    return getElementLinkedList(queue, 0)->data;
 }
 
 /** priorityQueueSize()
@@ -102,7 +121,7 @@ double priorityQueuePeek(PriorityQueueAsLinkedList* queue) {
  * @post   - queue unmodified; size of queue returned
  */
 int priorityQueueSize(PriorityQueueAsLinkedList* queue) {
-    return 0;
+    return lengthOfLinkedList(queue);
 }
 
 /** priorityQueuePrint()
@@ -112,7 +131,7 @@ int priorityQueueSize(PriorityQueueAsLinkedList* queue) {
  * @post   - queue unmodified; queue elements printed
  */
 void priorityQueuePrint(PriorityQueueAsLinkedList* queue) {
-    
+    printLinkedList(queue);
 }
 
 #endif  
